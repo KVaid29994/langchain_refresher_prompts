@@ -1,11 +1,16 @@
-from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from typing import TypedDict, Annotated, Optional, Literal
+from typing import Optional, Literal
 from pydantic import BaseModel, Field
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
 load_dotenv()
 
-model = ChatOpenAI()
+llm = HuggingFaceEndpoint(
+    repo_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    task="text-generation"
+)
+
+model = ChatHuggingFace(llm=llm)
 
 # schema
 class Review(BaseModel):
@@ -32,7 +37,7 @@ Stunning 200MP camera with incredible zoom capabilities
 Long battery life with fast charging
 S-Pen support is unique and useful
                                  
-Review by kashish Vaid
+Review by Nitish Singh
 """)
 
 print(result)
