@@ -1,0 +1,34 @@
+Output Parsers in LangChain are tools that transform the raw LLM output (usually text) into structured data formats like dict, list, Pydantic models, or custom objects.
+
+🔑 Key Points:
+Purpose:
+Convert LLM's unstructured responses into structured, machine-readable formats.
+
+Common Use-Cases:
+
+Extracting key fields (e.g., name, age) from text.
+
+Validating LLM output format.
+
+Enforcing output structure for downstream tasks.
+
+Popular Parsers:
+
+- StructuredOutputParser: For Pydantic models.--> based on predefined schemas
+- String Output parser - takes in lLM chaina and converts it into string
+- Json Output Parser
+- CommaSeparatedListOutputParser: Parses comma-separated values.
+- RegexParser: Uses regex to extract data.
+- OutputFixingParser: Auto-corrects if LLM output is malformed.
+
+Integration:
+Used with .invoke() or .call() after a prompt chain:
+
+chain = prompt | llm | parser
+result = chain.invoke({"input": "your input"})
+Why Important:
+
+Ensures reliable and usable output.
+
+Essential for chaining steps in agent workflows or pipelines.
+
